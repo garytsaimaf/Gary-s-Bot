@@ -1,7 +1,9 @@
 from config.loader import load_topics
 from output.report import build_daily_report
 from line.push import push_text
+
 from services.pubmed.search import search_pubmed
+from services.pubmed.fetch import fetch_pubmed_details
 
 
 def main():
@@ -12,38 +14,37 @@ def main():
 
     results = []
 
-    results.append("🩺 GMIA started successfully.")
+    results.append("🩺 GMIA Daily Oncology Intelligence")
+    results.append("")
+    results.append(f"Topic: {keyword}")
     results.append("")
 
-    results.append("Languages:")
+    pmids = search_pubmed(keyword)
 
-    for language in config["languages"]:
-        results.append(f"• {language}")
+    if len(pmids) == 0:
 
-    results.append("")
-
-    results.append("Topics:")
-
-    for disease in config["diseases"]:
-        results.append(f"• {disease}")
-
-    results.append("")
-
-    results.append(f"PubMed Search: {keyword}")
-
-    pubmed_ids = search_pubmed(keyword)
-
-    if len(pubmed_ids) == 0:
-
-        results.append("No PubMed records found.")
+        results.append("No PubMed articles found.")
 
     else:
 
-        results.append(f"Found {len(pubmed_ids)} records.")
+        articles = fetch_pubmed_details(pmids)
 
-        for pmid in pubmed_ids:
+        results.append(f"Found {len(articles)} article(s)")
+        results.append("")
 
-            results.append(f"PMID: {pmid}")
+        for index, article in enumerate(articles, start=1):
+
+            results.append(f"{index}. {article['title']}")
+
+            results.append(f"Journal: {article['journal']}")
+
+            results.append(f"Published: {article['date']}")
+
+            results.append(
+                f"https://pubmed.ncbi.nlm.nih.gov/{article['pmid']}/"
+            )
+
+            results.append("")
 
     message = build_daily_report(results)
 
@@ -53,5 +54,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
