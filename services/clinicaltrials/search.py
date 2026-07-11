@@ -3,14 +3,11 @@ import requests
 
 def search_trials(keyword, max_results=5):
 
-    url = "https://clinicaltrials.gov/api/query/studies"
+    url = "https://clinicaltrials.gov/api/v2/studies"
 
     params = {
-        "expr": keyword,
-        "fields": "NCTId,BriefTitle,OverallStatus,Phase",
-        "min_rnk": 1,
-        "max_rnk": max_results,
-        "fmt": "json",
+        "query.term": keyword,
+        "pageSize": max_results,
     }
 
     response = requests.get(url, params=params, timeout=30)
@@ -19,18 +16,26 @@ def search_trials(keyword, max_results=5):
 
     data = response.json()
 
-    studies = data.get("StudyFieldsResponse", {}).get("StudyFields", [])
+    studies = data.get("studies", [])
 
     results = []
 
     for study in studies:
 
+        protocol = study.get("protocolSection", {})
+
+        identification = protocol.get("identificationModule", {})
+
+        status = protocol.get("statusModule", {})
+
+        design = protocol.get("designModule", {})
+
         results.append(
             {
-                "nct": study.get("NCTId", [""])[0],
-                "title": study.get("BriefTitle", [""])[0],
-                "status": study.get("OverallStatus", [""])[0],
-                "phase": study.get("Phase", [""])[0],
+                "nct": identification.get("nctId", ""),
+                "title": identification.get("briefTitle", ""),
+                "status": status.get("overallStatus", ""),
+                "phase": ", ".join(design.get("phases", [])),
             }
         )
 
