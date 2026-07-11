@@ -10,10 +10,17 @@ jobs:
     permissions:
       contents: read
 
-    steps:
-      - uses: actions/checkout@v5
+    env:
+      LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+      LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
+      LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
 
-      - uses: actions/setup-python@v6
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -22,9 +29,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-     - name: Run Python
-  env:
-    LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-    LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
-    LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
-  run: python main.py
+      - name: Run Python
+        run: python main.py
