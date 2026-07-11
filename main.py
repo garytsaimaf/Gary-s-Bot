@@ -4,12 +4,16 @@ from output.formatter import (
     format_pubmed_section,
     format_google_news_section,
 )
+from output.clinicaltrials_formatter import (
+    format_clinical_trials_section,
+)
 
 from line.push import push_text
 
 from services.pubmed.search import search_pubmed
 from services.pubmed.fetch import fetch_pubmed_details
 from services.google.news import search_google_news
+from services.clinicaltrials.search import search_trials
 
 
 def main():
@@ -32,11 +36,8 @@ def main():
     pmids = search_pubmed(keyword)
 
     if len(pmids) == 0:
-
         articles = []
-
     else:
-
         articles = fetch_pubmed_details(pmids)
 
     results.extend(format_pubmed_section(articles))
@@ -48,6 +49,14 @@ def main():
     news = search_google_news(keyword)
 
     results.extend(format_google_news_section(news))
+
+    # -----------------------
+    # ClinicalTrials.gov
+    # -----------------------
+
+    trials = search_trials(keyword)
+
+    results.extend(format_clinical_trials_section(trials))
 
     message = build_daily_report(results)
 
