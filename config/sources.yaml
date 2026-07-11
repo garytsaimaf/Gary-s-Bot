@@ -1,0 +1,42 @@
+scientific:
+
+  - PubMed
+  - Google Scholar
+  - Nature
+  - NEJM
+  - JCO
+  - Lancet Oncology
+  - Annals of Oncology
+
+
+news:
+
+  - Google News
+  - Google
+
+
+clinical_trials:
+
+  - ClinicalTrials.gov
+
+
+regulatory:
+
+  - FDA
+  - EMA
+  - TFDA
+
+
+congress:
+
+  - ASCO
+  - ESMO
+  - AACR
+  - ESGO
+  - SGO
+
+
+companies:
+
+  - GSK
+  - Nuvalent
