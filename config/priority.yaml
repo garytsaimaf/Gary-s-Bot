@@ -1,0 +1,38 @@
+critical:
+
+  - FDA Approval
+
+  - EMA Approval
+
+  - TFDA Approval
+
+  - Phase III Positive
+
+  - NCCN Guideline
+
+
+high:
+
+  - NEJM
+
+  - Lancet Oncology
+
+  - ASCO Oral
+
+  - ESMO Presidential
+
+
+medium:
+
+  - PubMed
+
+  - Phase II
+
+  - Company Press Release
+
+
+low:
+
+  - Recruiting Trial
+
+  - Conference Announcement
