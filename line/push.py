@@ -27,3 +27,5 @@ def push_text(message):
 
     print(response.status_code)
     print(response.text)
+print("Token length:", len(CHANNEL_ACCESS_TOKEN) if CHANNEL_ACCESS_TOKEN else 0)
+print("Token starts with:", CHANNEL_ACCESS_TOKEN[:10] if CHANNEL_ACCESS_TOKEN else "None")
