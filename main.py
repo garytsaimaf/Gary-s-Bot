@@ -1,4 +1,14 @@
-print("===================================")
-print(" Gary's Medical AI Assistant ")
-print(" Version 1.0")
-print("===================================")
+from line.push import push_text
+
+push_text(
+"""🎉 Congratulations Gary!
+
+Your Medical Intelligence Assistant is now online.
+
+✅ GitHub Actions
+✅ LINE Messaging API
+✅ Python Environment
+
+Phase 1 is working successfully!
+"""
+)
