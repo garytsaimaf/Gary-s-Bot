@@ -1,0 +1,42 @@
+languages:
+
+  - English
+  - Traditional Chinese
+
+
+diseases:
+
+  - Endometrial Cancer
+  - Ovarian Cancer
+  - Colorectal Cancer
+  - Head and Neck Cancer
+  - GIST
+
+
+companies:
+
+  - GSK
+  - Nuvalent
+
+
+assets:
+
+  - Dostarlimab
+  - Jemperli
+
+  - Mo-Rez
+  - Mocertatug Rezetecan
+
+  - Ris-Rez
+  - Risvutatug Rezetecan
+
+
+trials:
+
+  - RUBY
+  - JADE
+  - DUO-E
+  - NRG-GY018
+  - BEHOLD
+  - ARTEMIS
+  - DOMENICA
