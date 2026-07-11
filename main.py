@@ -1,26 +1,57 @@
 from config.loader import load_topics
 from output.report import build_daily_report
 from line.push import push_text
+from services.pubmed.search import search_pubmed
 
-config = load_topics()
 
-results = []
+def main():
 
-results.append("🩺 GMIA started successfully.")
-results.append("")
+    config = load_topics()
 
-results.append("Languages:")
-for language in config["languages"]:
-    results.append(f"• {language}")
+    keyword = config["test_topic"]
 
-results.append("")
-results.append("Topics:")
+    results = []
 
-for disease in config["diseases"]:
-    results.append(f"• {disease}")
+    results.append("🩺 GMIA started successfully.")
+    results.append("")
 
-message = build_daily_report(results)
+    results.append("Languages:")
 
-print(message)
+    for language in config["languages"]:
+        results.append(f"• {language}")
 
-push_text(message)
+    results.append("")
+
+    results.append("Topics:")
+
+    for disease in config["diseases"]:
+        results.append(f"• {disease}")
+
+    results.append("")
+
+    results.append(f"PubMed Search: {keyword}")
+
+    pubmed_ids = search_pubmed(keyword)
+
+    if len(pubmed_ids) == 0:
+
+        results.append("No PubMed records found.")
+
+    else:
+
+        results.append(f"Found {len(pubmed_ids)} records.")
+
+        for pmid in pubmed_ids:
+
+            results.append(f"PMID: {pmid}")
+
+    message = build_daily_report(results)
+
+    print(message)
+
+    push_text(message)
+
+
+if __name__ == "__main__":
+
+    main()
