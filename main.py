@@ -1,14 +1,17 @@
-from line.push import push_text
+from services.google.search import search_google
+from services.pubmed.search import search_pubmed
+from services.companies.gsk import search_gsk
 
-push_text(
-"""🎉 Congratulations Gary!
+keyword = "Mo-Rez"
 
-Your Medical Intelligence Assistant is now online.
+print("===================================")
+print("Gary Medical Intelligence Assistant")
+print("===================================")
 
-✅ GitHub Actions
-✅ LINE Messaging API
-✅ Python Environment
+search_google(keyword)
 
-Phase 1 is working successfully!
-"""
-)
+search_pubmed(keyword)
+
+search_gsk(keyword)
+
+print("Search Finished")
