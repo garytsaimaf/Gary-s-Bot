@@ -1,17 +1,26 @@
-from services.google.search import search_google
-from services.pubmed.search import search_pubmed
-from services.companies.gsk import search_gsk
+from config.loader import load_topics
+from output.report import build_daily_report
+from line.push import push_text
 
-keyword = "Mo-Rez"
+config = load_topics()
 
-print("===================================")
-print("Gary Medical Intelligence Assistant")
-print("===================================")
+results = []
 
-search_google(keyword)
+results.append("🩺 GMIA started successfully.")
+results.append("")
 
-search_pubmed(keyword)
+results.append("Languages:")
+for language in config["languages"]:
+    results.append(f"• {language}")
 
-search_gsk(keyword)
+results.append("")
+results.append("Topics:")
 
-print("Search Finished")
+for disease in config["diseases"]:
+    results.append(f"• {disease}")
+
+message = build_daily_report(results)
+
+print(message)
+
+push_text(message)
