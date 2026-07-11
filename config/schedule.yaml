@@ -1,0 +1,19 @@
+daily:
+
+  enabled: true
+
+  time: "08:30"
+
+
+breaking_news:
+
+  enabled: true
+
+
+weekly_summary:
+
+  enabled: true
+
+  day: Friday
+
+  time: "18:00"
