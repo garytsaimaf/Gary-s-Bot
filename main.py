@@ -7,6 +7,9 @@ from output.formatter import (
 from output.clinicaltrials_formatter import (
     format_clinical_trials_section,
 )
+from output.gsk_formatter import (
+    format_gsk_section,
+)
 
 from line.push import push_text
 
@@ -14,6 +17,7 @@ from services.pubmed.search import search_pubmed
 from services.pubmed.fetch import fetch_pubmed_details
 from services.google.news import search_google_news
 from services.clinicaltrials.search import search_trials
+from services.gsk.search import search_gsk_news
 
 
 def main():
@@ -57,6 +61,14 @@ def main():
     trials = search_trials(keyword)
 
     results.extend(format_clinical_trials_section(trials))
+
+    # -----------------------
+    # GSK Press Releases
+    # -----------------------
+
+    gsk_news = search_gsk_news()
+
+    results.extend(format_gsk_section(gsk_news))
 
     message = build_daily_report(results)
 
