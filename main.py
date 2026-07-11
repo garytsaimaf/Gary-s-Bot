@@ -1,5 +1,10 @@
 from config.loader import load_topics
 from output.report import build_daily_report
+from output.formatter import (
+    format_pubmed_section,
+    format_google_news_section,
+)
+
 from line.push import push_text
 
 from services.pubmed.search import search_pubmed
@@ -24,65 +29,25 @@ def main():
     # PubMed
     # -----------------------
 
-    results.append("📚 PubMed")
-    results.append("")
-
     pmids = search_pubmed(keyword)
 
     if len(pmids) == 0:
 
-        results.append("No PubMed articles found.")
+        articles = []
 
     else:
 
         articles = fetch_pubmed_details(pmids)
 
-        results.append(f"Found {len(articles)} article(s)")
-        results.append("")
-
-        for index, article in enumerate(articles, start=1):
-
-            results.append(f"{index}. {article['title']}")
-
-            results.append(f"Journal: {article['journal']}")
-
-            results.append(f"Published: {article['date']}")
-
-            results.append(
-                f"https://pubmed.ncbi.nlm.nih.gov/{article['pmid']}/"
-            )
-
-            results.append("")
+    results.extend(format_pubmed_section(articles))
 
     # -----------------------
     # Google News
     # -----------------------
 
-    results.append("--------------------------------")
-    results.append("")
-    results.append("📰 Google News")
-    results.append("")
-
     news = search_google_news(keyword)
 
-    if len(news) == 0:
-
-        results.append("No Google News found.")
-
-    else:
-
-        results.append(f"Found {len(news)} news article(s)")
-        results.append("")
-
-        for index, item in enumerate(news, start=1):
-
-            results.append(f"{index}. {item['title']}")
-
-            results.append(f"Published: {item['published']}")
-
-            results.append(item["link"])
-
-            results.append("")
+    results.extend(format_google_news_section(news))
 
     message = build_daily_report(results)
 
