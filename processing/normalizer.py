@@ -13,6 +13,17 @@ def normalize(
     data = []
 
     for item in pubmed:
+
+        link = (
+            item.get("url")
+            or item.get("link")
+            or (
+                f"https://pubmed.ncbi.nlm.nih.gov/{item.get('pmid')}/"
+                if item.get("pmid")
+                else ""
+            )
+        )
+
         data.append(
             {
                 "source": "PubMed",
@@ -20,11 +31,12 @@ def normalize(
                 "title": item.get("title", ""),
                 "journal": item.get("journal", ""),
                 "date": item.get("pubdate", ""),
-                "link": item.get("url", ""),
+                "link": link,
             }
         )
 
     for item in google_news:
+
         data.append(
             {
                 "source": "Google News",
@@ -37,6 +49,18 @@ def normalize(
         )
 
     for item in clinical_trials:
+
+        nct = item.get("nct") or item.get("nctid") or item.get("id")
+
+        link = (
+            item.get("url")
+            or (
+                f"https://clinicaltrials.gov/study/{nct}"
+                if nct
+                else ""
+            )
+        )
+
         data.append(
             {
                 "source": "ClinicalTrials.gov",
@@ -44,13 +68,14 @@ def normalize(
                 "title": item.get("title", ""),
                 "journal": "",
                 "date": "",
-                "link": item.get("url", ""),
                 "phase": item.get("phase", ""),
                 "status": item.get("status", ""),
+                "link": link,
             }
         )
 
     for item in gsk:
+
         data.append(
             {
                 "source": "GSK",
@@ -63,6 +88,7 @@ def normalize(
         )
 
     for item in fda:
+
         data.append(
             {
                 "source": "FDA",
@@ -75,6 +101,7 @@ def normalize(
         )
 
     for item in nhi:
+
         data.append(
             {
                 "source": "Taiwan NHI",
