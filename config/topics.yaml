@@ -1,17 +1,19 @@
-test_topic: endometrial cancer
 languages:
 
   - English
   - Traditional Chinese
 
 
-diseases:
+disease_priority:
 
   - Endometrial Cancer
-  - Ovarian Cancer
   - Colorectal Cancer
+  - Rectal Cancer
+  - Colon Cancer
   - Head and Neck Cancer
-  - GIST
+  - Ovarian Cancer
+  - Gastrointestinal Stromal Tumor
+  - Lung Cancer
 
 
 companies:
@@ -27,9 +29,16 @@ assets:
 
   - Mo-Rez
   - Mocertatug Rezetecan
+  - GSK5733584
 
   - Ris-Rez
   - Risvutatug Rezetecan
+  - GSK5764227
+
+  - Velzatinib
+  - Zidesamtinib
+  - IDRX-42
+  - Neladalkib
 
 
 trials:
@@ -41,3 +50,6 @@ trials:
   - BEHOLD
   - ARTEMIS
   - DOMENICA
+  - StrateGIST
+  - EMBOLD
+  - ARTEMIS
