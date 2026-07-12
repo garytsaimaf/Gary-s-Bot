@@ -21,7 +21,7 @@ from line.push import push_text
 
 def main():
 
-    keyword = load_topics()["test_topic"]
+    keyword = load_topics()
 
     pmids = search_pubmed(keyword)
 
