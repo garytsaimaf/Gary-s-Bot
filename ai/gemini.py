@@ -1,4 +1,5 @@
 import os
+
 from google import genai
 
 PREFERRED_MODELS = [
@@ -22,6 +23,7 @@ def ask_gemini(prompt):
     available = {m.name for m in client.models.list()}
 
     model = None
+
     for candidate in PREFERRED_MODELS:
         if candidate in available:
             model = candidate
