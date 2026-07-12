@@ -1,0 +1,25 @@
+sources:
+
+  pubmed:
+    period_days: 30
+    max_results_per_disease: 3
+
+  google_news:
+    period_days: 7
+    max_results_per_keyword: 2
+
+  clinicaltrials:
+    period_days: 365
+    max_results_per_disease: 2
+
+  gsk:
+    period_days: 30
+    max_results: 5
+
+  fda:
+    period_days: 30
+    max_results: 5
+
+  nhi:
+    period_days: 30
+    max_results: 5
