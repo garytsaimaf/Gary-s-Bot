@@ -1,4 +1,4 @@
-from config.loader import load_topics
+from config.loader import load_topics, load_search_config
 
 from services.pubmed.search import search_pubmed
 from services.pubmed.fetch import fetch_pubmed_details
@@ -25,15 +25,16 @@ def unique_by_title(items):
     results = []
 
     for item in items:
-        
+
         title = (
-    item.get("title", "")
-    .replace("-", " ")
-    .replace(":", "")
-    .replace(",", "")
-    .strip()
-    .lower()
-)
+            item.get("title", "")
+            .replace("-", " ")
+            .replace(":", "")
+            .replace(",", "")
+            .replace(".", "")
+            .strip()
+            .lower()
+        )
 
         if not title:
             continue
@@ -49,30 +50,40 @@ def unique_by_title(items):
 
 def main():
 
-    config = load_topics()
+    topics = load_topics()
+    config = load_search_config()["sources"]
 
     pubmed_records = []
     google_records = []
     trial_records = []
 
-    for disease in config["disease_priority"]:
+    for disease in topics["disease_priority"]:
 
         english_keywords = disease.get("english", [])
         mandarin_keywords = disease.get("mandarin", [])
 
-        # ---------- PubMed ----------
+        # -----------------------
+        # PubMed
+        # -----------------------
+
         if english_keywords:
 
             keyword = english_keywords[0]
 
-            pmids = search_pubmed(keyword)[:4]
+            pmids = search_pubmed(
+                keyword
+            )[:config["pubmed"]["max_results_per_disease"]]
 
             if pmids:
+
                 pubmed_records.extend(
                     fetch_pubmed_details(pmids)
                 )
 
-        # ---------- Google News ----------
+        # -----------------------
+        # Google News
+        # -----------------------
+
         google_keywords = []
 
         google_keywords.extend(english_keywords)
@@ -81,19 +92,31 @@ def main():
         for keyword in google_keywords:
 
             google_records.extend(
+
                 search_google_news(
+
                     keyword,
-                max_results=2
+
+                    max_results=config["google_news"]["max_results_per_keyword"]
+
                 )
+
             )
 
-        # ---------- ClinicalTrials ----------
+        # -----------------------
+        # ClinicalTrials.gov
+        # -----------------------
+
         if english_keywords:
 
             keyword = english_keywords[0]
 
             trial_records.extend(
-                search_trials(keyword)[:1]
+
+                search_trials(keyword)[
+                    :config["clinicaltrials"]["max_results_per_disease"]
+                ]
+
             )
 
     pubmed_records = unique_by_title(pubmed_records)
@@ -105,12 +128,19 @@ def main():
     nhi_records = search_nhi_news()
 
     records = normalize(
+
         pubmed_records,
+
         google_records,
+
         trial_records,
+
         gsk_records,
+
         fda_records,
+
         nhi_records,
+
     )
 
     ai_output = review(records)
