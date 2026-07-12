@@ -4,20 +4,25 @@ from ai.provider import summarize
 
 def generate_summary(report_text):
 
-    prompt = (
-        SYSTEM_PROMPT
-        + "\n\n"
-        + report_text
-    )
+    prompt = f"""
+{SYSTEM_PROMPT}
+
+========================
+
+{report_text}
+"""
 
     try:
 
-        return summarize(prompt)
+        result = summarize(prompt)
 
-    except Exception:
+        return result.strip()
+
+    except Exception as e:
 
         return (
-            "No major oncology updates requiring immediate "
-            "attention were identified, or the AI summary "
-            "service is temporarily unavailable."
+            "Executive Summary\n"
+            "AI service temporarily unavailable.\n\n"
+            "Top Intelligence\n"
+            "No AI analysis available."
         )
