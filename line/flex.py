@@ -1,4 +1,4 @@
-def article_button(title, url):
+def article_button(url):
 
     return {
         "type": "button",
@@ -6,7 +6,7 @@ def article_button(title, url):
         "height": "sm",
         "action": {
             "type": "uri",
-            "label": title,
+            "label": "🔗 Open Article",
             "uri": url
         }
     }
