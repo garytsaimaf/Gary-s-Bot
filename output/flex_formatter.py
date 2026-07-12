@@ -17,16 +17,26 @@ def build_flex(summary, articles):
 
     contents.append({
         "type": "text",
-        "text": "🩺 早安 This is ONCOLOGY Hawkeye Daily Update",
+        "text": "🩺 早安 Oncology HawkEye Daily Update",
         "weight": "bold",
-        "size": "lg"
+        "size": "xl"
     })
+
+    contents.append({
+        "type": "text",
+        "text": "Daily Oncology Intelligence",
+        "size": "sm",
+        "color": "#888888",
+        "margin": "sm"
+    })
+
+    contents.append(separator())
 
     contents.append({
         "type": "text",
         "text": "📌 Summary",
         "weight": "bold",
-        "margin": "xl"
+        "margin": "lg"
     })
 
     contents.append({
@@ -36,91 +46,63 @@ def build_flex(summary, articles):
         "size": "sm"
     })
 
+    contents.append(separator())
+
     contents.append({
         "type": "text",
         "text": "📚 Top Intelligence",
         "weight": "bold",
-        "margin": "xl"
+        "margin": "lg"
     })
 
     for i, item in enumerate(articles):
 
         contents.append({
-
             "type": "text",
-
             "text": f"{NUMBER[i]} {item['title']}",
-
-            "wrap": True,
-
             "weight": "bold",
-
-            "margin": "lg"
-
-        })
-
-        contents.append({
-
-            "type": "text",
-
-            "text": item["why"],
-
             "wrap": True,
-
-            "size": "sm"
-
+            "margin": "lg"
         })
 
         contents.append({
-
             "type": "text",
-
-            "text": f"Source: {item['source']}",
-
-            "size": "xs",
-
-            "color": "#888888"
-
+            "text": f"💡 {item['why']}",
+            "wrap": True,
+            "size": "sm",
+            "margin": "sm"
         })
 
-        contents.append(
+        if item["source"]:
 
-            article_button(
+            contents.append({
+                "type": "text",
+                "text": f"📍 {item['source']}",
+                "size": "xs",
+                "color": "#888888",
+                "margin": "sm"
+            })
 
-                "🔗 Open Article",
+        if item["link"]:
 
-                item["link"]
-
+            contents.append(
+                article_button(
+                    "🔗 Open Article",
+                    item["link"]
+                )
             )
 
-        )
-
-        contents.append(
-
-            separator()
-
-        )
+        contents.append(separator())
 
     return {
-
         "type": "flex",
-
-        "altText": "Daily Oncology Intelligence",
-
+        "altText": "早安 Oncology HawkEye Daily Update",
         "contents": {
-
             "type": "bubble",
-
             "body": {
-
                 "type": "box",
-
                 "layout": "vertical",
-
                 "contents": contents
-
             }
-
         }
-
     }
