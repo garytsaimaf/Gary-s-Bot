@@ -9,6 +9,15 @@ def load_topics():
         encoding="utf-8"
     ) as f:
 
-        config = yaml.safe_load(f)
+        return yaml.safe_load(f)
 
-    return config
+
+def load_search_config():
+
+    with open(
+        "config/search_config.yaml",
+        "r",
+        encoding="utf-8"
+    ) as f:
+
+        return yaml.safe_load(f)
