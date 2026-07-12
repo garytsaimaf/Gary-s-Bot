@@ -1,19 +1,66 @@
 languages:
 
-  - English
-  - Traditional Chinese
+  - english
+  - mandarin
 
 
 disease_priority:
 
-  - Endometrial Cancer
-  - Colorectal Cancer
-  - Rectal Cancer
-  - Colon Cancer
-  - Head and Neck Cancer
-  - Ovarian Cancer
-  - Gastrointestinal Stromal Tumor
-  - Lung Cancer
+  - id: EC
+    english:
+      - Endometrial Cancer
+    mandarin:
+      - 子宮內膜癌
+
+  - id: CRC
+    english:
+      - Colorectal Cancer
+    mandarin:
+      - 大腸直腸癌
+
+  - id: RC
+    english:
+      - Rectal Cancer
+    mandarin:
+      - 直腸癌
+
+  - id: CC
+    english:
+      - Colon Cancer
+    mandarin:
+      - 結腸癌
+
+  - id: HNC
+    english:
+      - Head and Neck Cancer
+      - Head & Neck Cancer
+    mandarin:
+      - 頭頸癌
+
+  - id: OC
+    english:
+      - Ovarian Cancer
+    mandarin:
+      - 卵巢癌
+
+  - id: GIST
+    english:
+      - Gastrointestinal Stromal Tumor
+      - GIST
+    mandarin:
+      - 胃腸道基質瘤
+
+  - id: LC
+    english:
+      - Lung Cancer
+      - Non-Small Cell Lung Cancer
+      - NSCLC
+      - Small Cell Lung Cancer
+      - SCLC
+    mandarin:
+      - 肺癌
+      - 非小細胞肺癌
+      - 小細胞肺癌
 
 
 companies:
