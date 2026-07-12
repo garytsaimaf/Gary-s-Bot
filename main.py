@@ -25,8 +25,15 @@ def unique_by_title(items):
     results = []
 
     for item in items:
-
-        title = item.get("title", "").strip().lower()
+        
+        title = (
+    item.get("title", "")
+    .replace("-", " ")
+    .replace(":", "")
+    .replace(",", "")
+    .strip()
+    .lower()
+)
 
         if not title:
             continue
