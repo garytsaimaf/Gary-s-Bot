@@ -2,7 +2,6 @@ from config.loader import load_topics
 
 from services.pubmed.search import search_pubmed
 from services.pubmed.fetch import fetch_pubmed_details
-
 from services.google.news import search_google_news
 from services.clinicaltrials.search import search_trials
 from services.gsk.search import search_gsk_news
@@ -22,18 +21,13 @@ from line.push import push_text
 
 def main():
 
-    config = load_topics()
-
-    keyword = config["test_topic"]
+    keyword = load_topics()["test_topic"]
 
     pmids = search_pubmed(keyword)
 
-    if pmids:
-        pubmed = fetch_pubmed_details(pmids)
-    else:
-        pubmed = []
+    pubmed = fetch_pubmed_details(pmids) if pmids else []
 
-    google_news = search_google_news(keyword)
+    google = search_google_news(keyword)
 
     trials = search_trials(keyword)
 
@@ -45,16 +39,16 @@ def main():
 
     records = normalize(
         pubmed,
-        google_news,
+        google,
         trials,
         gsk,
         fda,
         nhi
     )
 
-    ai_result = review(records)
+    ai_output = review(records)
 
-    summary, articles = parse_ai_output(ai_result)
+    summary, articles = parse_ai_output(ai_output)
 
     articles = attach_links(records, articles)
 
