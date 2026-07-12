@@ -1,11 +1,7 @@
-def build_executive_message(ai_result):
+def build_executive_message(ai_output):
 
-    lines = []
-
-    lines.append("🩺 Gary Medical Intelligence Assistant")
-    lines.append("")
-    lines.append("Daily Oncology Intelligence")
-    lines.append("")
-    lines.append(ai_result.strip())
-
-    return "\n".join(lines)
+    return (
+        "🩺 Gary Medical Intelligence Assistant\n\n"
+        "Daily Oncology Intelligence\n\n"
+        + ai_output.strip()
+    )
