@@ -1,14 +1,26 @@
 import feedparser
 from urllib.parse import quote
 
+from config.loader import load_search_config
 
-def search_google_news(keyword, max_results=5):
 
-    query = quote(keyword)
+def search_google_news(keyword, max_results=None):
+
+    config = load_search_config()["sources"]["google_news"]
+
+    if max_results is None:
+        max_results = config["max_results_per_keyword"]
+
+    period_days = config["period_days"]
+
+    query = quote(f"{keyword} when:{period_days}d")
 
     url = (
         "https://news.google.com/rss/search?"
-        f"q={query}&hl=en-US&gl=US&ceid=US:en"
+        f"q={query}"
+        "&hl=en-US"
+        "&gl=US"
+        "&ceid=US:en"
     )
 
     feed = feedparser.parse(url)
@@ -39,7 +51,7 @@ def search_google_news(keyword, max_results=5):
             {
                 "title": entry.title,
                 "link": original_link,
-                "published": entry.published,
+                "published": getattr(entry, "published", ""),
             }
         )
 
