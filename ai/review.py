@@ -1,7 +1,6 @@
 import json
 
 from ai.gemini import ask_gemini
-
 from ai.prompt import SYSTEM_PROMPT
 
 
@@ -16,26 +15,23 @@ def review(records):
     prompt = f"""
 {SYSTEM_PROMPT}
 
-Below is structured oncology intelligence collected today.
+Below are today's oncology intelligence records.
 
-Read ALL records before making any judgement.
+Review ALL records before making any decision.
 
-Tasks
+You are expected to think like an experienced GSK APAC Medical Advisor.
 
-1. Remove duplicated events.
+Do not simply summarize.
 
-2. Prioritize by:
+Identify scientific insights that may influence:
 
-- Disease Area
-- Clinical Impact
-- APAC Relevance
-- Company Relevance
-
-3. Select ONLY the six most important updates.
-
-4. Produce ONE Executive Summary.
-
-Return ONLY the requested format.
+- Scientific engagement
+- Evidence communication
+- Competitive intelligence
+- Medical strategy
+- Future congress discussions
+- Biomarker strategy
+- Unmet medical needs
 
 Structured Records
 
