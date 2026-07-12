@@ -2,12 +2,12 @@ from line.flex import article_button, separator
 
 
 NUMBER = [
-    "①️⃣",
-    "②️⃣",
-    "③️⃣",
-    "④️⃣",
-    "⑤️⃣",
-    "⑥️⃣"
+    "①",
+    "②",
+    "③",
+    "④",
+    "⑤",
+    "⑥"
 ]
 
 
@@ -17,9 +17,9 @@ def build_flex(summary, articles):
 
     contents.append({
         "type": "text",
-        "text": "🩺 早安 Oncology HawkEye Daily Update",
+        "text": "🩺 早安！這是 Oncology HawkEye Daily",
         "weight": "bold",
-        "size": "xl"
+        "size": "sm"
     })
 
     contents.append({
