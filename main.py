@@ -18,6 +18,10 @@ from output.fda_formatter import (
     format_fda_section,
 )
 
+from output.nhi_formatter import (
+    format_nhi_section,
+)
+
 from line.push import push_text
 
 from services.pubmed.search import search_pubmed
@@ -30,6 +34,8 @@ from services.clinicaltrials.search import search_trials
 from services.gsk.search import search_gsk_news
 
 from services.fda.search import search_fda_news
+
+from services.nhi.search import search_nhi_news
 
 
 def main():
@@ -89,6 +95,14 @@ def main():
     fda_news = search_fda_news()
 
     results.extend(format_fda_section(fda_news))
+
+    # -----------------------
+    # NHI Announcements
+    # -----------------------
+
+    nhi_news = search_nhi_news()
+
+    results.extend(format_nhi_section(nhi_news))
 
     message = build_daily_report(results)
 
