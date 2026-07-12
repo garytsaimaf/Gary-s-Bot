@@ -1,14 +1,12 @@
 import os
 import requests
 
-
 LINE_PUSH_API = "https://api.line.me/v2/bot/message/push"
 
 
 def push_text(message):
 
     token = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
-
     user = os.environ["LINE_USER_ID"]
 
     headers = {
@@ -16,12 +14,24 @@ def push_text(message):
         "Content-Type": "application/json"
     }
 
-    payload = {
-        "to": user,
-        "messages": [
-            message
-        ]
-    }
+    if isinstance(message, dict):
+
+        payload = {
+            "to": user,
+            "messages": [message]
+        }
+
+    else:
+
+        payload = {
+            "to": user,
+            "messages": [
+                {
+                    "type": "text",
+                    "text": message
+                }
+            ]
+        }
 
     response = requests.post(
         LINE_PUSH_API,
@@ -31,3 +41,5 @@ def push_text(message):
 
     print(response.status_code)
     print(response.text)
+
+    response.raise_for_status()
