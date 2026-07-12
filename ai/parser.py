@@ -7,50 +7,61 @@ def parse_ai_output(text):
 
     articles = []
 
-    lines = text.splitlines()
-
     mode = None
 
     current = None
 
-    for line in lines:
+    for raw in text.splitlines():
 
-        line = line.strip()
+        line = raw.strip()
 
         if not line:
             continue
 
-        if line.startswith("Summary"):
+        lower = line.lower()
+
+        if lower.startswith("summary"):
             mode = "summary"
             continue
 
-        if line.startswith("Top Intelligence"):
+        if lower.startswith("top intelligence"):
             mode = "top"
             continue
 
         if mode == "summary":
+
             summary += line + " "
 
-        elif mode == "top":
+            continue
 
-            if line.startswith("Title:"):
+        if mode != "top":
+            continue
 
-                if current:
-                    articles.append(current)
+        if line.startswith("Title:"):
 
-                current = {
-                    "title": line.replace("Title:", "").strip(),
-                    "why": "",
-                    "link": ""
-                }
+            if current:
+                articles.append(current)
 
-            elif line.startswith("Why it matters:"):
+            current = {
+                "title": line.replace(
+                    "Title:",
+                    ""
+                ).strip(),
+                "why": "",
+                "link": "",
+                "source": ""
+            }
 
-                if current:
-                    current["why"] = line.replace(
-                        "Why it matters:",
-                        ""
-                    ).strip()
+            continue
+
+        if line.startswith("Why it matters:"):
+
+            if current:
+
+                current["why"] = line.replace(
+                    "Why it matters:",
+                    ""
+                ).strip()
 
     if current:
         articles.append(current)
