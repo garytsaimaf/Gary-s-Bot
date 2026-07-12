@@ -19,13 +19,13 @@ def build_flex(summary, articles):
         "type": "text",
         "text": "🩺 早安！這是 Oncology HawkEye Daily",
         "weight": "bold",
-        "size": "sm"
+        "size": "md"
     })
 
     contents.append({
         "type": "text",
         "text": "Daily Oncology Intelligence",
-        "size": "sm",
+        "size": "xs",
         "color": "#888888",
         "margin": "sm"
     })
@@ -36,6 +36,7 @@ def build_flex(summary, articles):
         "type": "text",
         "text": "📌 Summary",
         "weight": "bold",
+        "size": "sm",
         "margin": "lg"
     })
 
@@ -52,6 +53,7 @@ def build_flex(summary, articles):
         "type": "text",
         "text": "📚 Top Intelligence",
         "weight": "bold",
+        "size": "sm",
         "margin": "lg"
     })
 
@@ -59,8 +61,9 @@ def build_flex(summary, articles):
 
         contents.append({
             "type": "text",
-            "text": f"{NUMBER[i]} {item['title']}",
+            "text": f"{NUMBER[i]}. {item['title']}",
             "weight": "bold",
+            "size": "sm",
             "wrap": True,
             "margin": "lg"
         })
@@ -73,7 +76,7 @@ def build_flex(summary, articles):
             "margin": "sm"
         })
 
-        if item["source"]:
+        if item.get("source"):
 
             contents.append({
                 "type": "text",
@@ -83,11 +86,10 @@ def build_flex(summary, articles):
                 "margin": "sm"
             })
 
-        if item["link"]:
+        if item.get("link"):
 
             contents.append(
                 article_button(
-                    "🔗 Open Article",
                     item["link"]
                 )
             )
@@ -96,7 +98,7 @@ def build_flex(summary, articles):
 
     return {
         "type": "flex",
-        "altText": "早安 Oncology HawkEye Daily Update",
+        "altText": "Daily Oncology Intelligence",
         "contents": {
             "type": "bubble",
             "body": {
