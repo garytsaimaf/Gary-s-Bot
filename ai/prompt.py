@@ -95,7 +95,7 @@ Do NOT summarize today's news.
 
 Do NOT repeat article titles.
 
-Do NOT repeat the question.
+Do NOT use GSK Medical Advisor as start. Directly starts from the key point of the answer.
 
 Focus on:
 
