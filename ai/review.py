@@ -15,23 +15,29 @@ def review(records):
     prompt = f"""
 {SYSTEM_PROMPT}
 
-Below are today's oncology intelligence records.
+Below are today's structured oncology intelligence records.
 
-Review ALL records before making any decision.
+IMPORTANT
 
-You are expected to think like an experienced GSK APAC Medical Advisor.
+Every record already contains a source URL.
 
-Do not simply summarize.
+Always preserve the original URL.
 
-Identify scientific insights that may influence:
+Never leave the Link field empty.
 
-- Scientific engagement
-- Evidence communication
-- Competitive intelligence
-- Medical strategy
-- Future congress discussions
-- Biomarker strategy
-- Unmet medical needs
+If a record contains a URL, output EXACTLY the same URL.
+
+Never replace it.
+
+Never omit it.
+
+Review ALL records.
+
+Remove duplicated events.
+
+Select ONLY the six highest-priority intelligence.
+
+Return EXACTLY the requested format.
 
 Structured Records
 
