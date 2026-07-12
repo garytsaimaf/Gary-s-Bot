@@ -11,7 +11,13 @@ def summarize(prompt):
 
         try:
 
-            return ask_gemini(prompt)
+            result = ask_gemini(prompt)
+
+            result = result.replace("**", "")
+            result = result.replace("```", "")
+            result = result.replace("#", "")
+
+            return result.strip()
 
         except Exception as e:
 
