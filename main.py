@@ -58,7 +58,7 @@ def main():
 
             keyword = english_keywords[0]
 
-            pmids = search_pubmed(keyword)
+            pmids = search_pubmed(keyword)[:4]
 
             if pmids:
                 pubmed_records.extend(
@@ -74,7 +74,10 @@ def main():
         for keyword in google_keywords:
 
             google_records.extend(
-                search_google_news(keyword)
+                search_google_news(
+                    keyword,
+                max_results=2
+                )
             )
 
         # ---------- ClinicalTrials ----------
@@ -83,7 +86,7 @@ def main():
             keyword = english_keywords[0]
 
             trial_records.extend(
-                search_trials(keyword)
+                search_trials(keyword)[:1]
             )
 
     pubmed_records = unique_by_title(pubmed_records)
