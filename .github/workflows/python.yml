@@ -3,8 +3,13 @@ name: Gary's Medical AI Assistant
 on:
   workflow_dispatch:
 
+  schedule:
+    # Every day 00:30 UTC = 08:30 Taiwan
+    - cron: "30 0 * * *"
+
 jobs:
   run-python:
+
     runs-on: ubuntu-latest
 
     permissions:
@@ -17,6 +22,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v5
 
@@ -30,5 +36,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Python
+      - name: Run GMIA
         run: python main.py
