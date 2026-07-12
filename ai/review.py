@@ -14,47 +14,32 @@ def review(records):
     )
 
     prompt = f"""
-
 {SYSTEM_PROMPT}
 
-Review ALL records.
+Below is structured oncology intelligence collected today.
 
-These are structured oncology intelligence records.
+Read ALL records before making any judgement.
 
-Tasks:
+Tasks
 
-1. Read ALL records.
+1. Remove duplicated events.
 
-2. Remove duplicate events.
-
-3. Rank by:
+2. Prioritize by:
 
 - Disease Area
 - Clinical Impact
 - APAC Relevance
 - Company Relevance
 
-4. Select ONLY Top 6.
+3. Select ONLY the six most important updates.
 
-5. Produce ONE Executive Summary.
+4. Produce ONE Executive Summary.
 
-Requirements
-
-Executive Summary:
-Maximum 50 words.
-
-Each Top Intelligence:
-
-Title
-
-Why it matters (≤20 words)
-
-Link
+Return ONLY the requested format.
 
 Structured Records
 
 {payload}
-
 """
 
     return ask_gemini(prompt)
