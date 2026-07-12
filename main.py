@@ -12,8 +12,10 @@ from services.nhi.search import search_nhi_news
 from processing.normalizer import normalize
 
 from ai.review import review
+from ai.parser import parse_ai_output
+from ai.matcher import attach_links
 
-from output.executive_formatter import build_executive_message
+from output.flex_formatter import build_flex
 
 from line.push import push_text
 
@@ -33,7 +35,7 @@ def main():
 
     google_news = search_google_news(keyword)
 
-    clinical_trials = search_trials(keyword)
+    trials = search_trials(keyword)
 
     gsk = search_gsk_news()
 
@@ -44,19 +46,21 @@ def main():
     records = normalize(
         pubmed,
         google_news,
-        clinical_trials,
+        trials,
         gsk,
         fda,
-        nhi,
+        nhi
     )
 
-    ai_output = review(records)
+    ai_result = review(records)
 
-    message = build_executive_message(ai_output)
+    summary, articles = parse_ai_output(ai_result)
 
-    print(message)
+    articles = attach_links(records, articles)
 
-    push_text(message)
+    flex = build_flex(summary, articles)
+
+    push_text(flex)
 
 
 if __name__ == "__main__":
