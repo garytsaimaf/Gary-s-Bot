@@ -2,12 +2,12 @@ from line.flex import article_button, separator
 
 
 NUMBER = [
-    "①",
-    "②",
-    "③",
-    "④",
-    "⑤",
-    "⑥"
+    "1️⃣",
+    "2️⃣",
+    "3️⃣",
+    "4️⃣",
+    "5️⃣",
+    "6️⃣"
 ]
 
 
@@ -17,7 +17,7 @@ def build_flex(summary, articles):
 
     contents.append({
         "type": "text",
-        "text": "🩺 Daily ONC Intelligence",
+        "text": "‼️Daily ONC Intelligence🔴 ",
         "weight": "bold",
         "size": "md"
     })
@@ -70,7 +70,7 @@ def build_flex(summary, articles):
 
         contents.append({
             "type": "text",
-            "text": f"💡 {item['why'][:120]}",
+            "text": f"💡 {item['why']}",
             "wrap": True,
             "size": "sm",
             "margin": "sm"
@@ -98,7 +98,7 @@ def build_flex(summary, articles):
 
     return {
         "type": "flex",
-        "altText": "早安安安！腫瘤新知推播通知",
+        "altText": "早安安安！腫瘤新知推播通知來嘍❤️",
         "contents": {
             "type": "bubble",
             "body": {
