@@ -20,6 +20,11 @@ def generate_summary(report_text):
 
     except Exception as e:
 
+        print("========== GEMINI ERROR ==========")
+        print(type(e).__name__)
+        print(str(e))
+        print("==================================")
+
         return (
             "Executive Summary\n"
             "AI service temporarily unavailable.\n\n"
