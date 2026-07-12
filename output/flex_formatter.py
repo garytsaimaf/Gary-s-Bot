@@ -17,7 +17,7 @@ def build_flex(summary, articles):
 
     contents.append({
         "type": "text",
-        "text": "🩺 早安！這是 Oncology HawkEye Daily",
+        "text": "🩺 Daily ONC Intelligence",
         "weight": "bold",
         "size": "md"
     })
@@ -98,7 +98,7 @@ def build_flex(summary, articles):
 
     return {
         "type": "flex",
-        "altText": "Daily Oncology Intelligence",
+        "altText": "早安安安！腫瘤新知推播通知",
         "contents": {
             "type": "bubble",
             "body": {
