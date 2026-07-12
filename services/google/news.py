@@ -17,10 +17,30 @@ def search_google_news(keyword, max_results=5):
 
     for entry in feed.entries[:max_results]:
 
-        articles.append({
-            "title": entry.title,
-            "link": entry.link,
-            "published": entry.published
-        })
+        original_link = ""
+
+        if hasattr(entry, "links"):
+
+            for link in entry.links:
+
+                href = link.get("href", "")
+
+                if (
+                    href.startswith("http")
+                    and "news.google.com" not in href
+                ):
+                    original_link = href
+                    break
+
+        if not original_link:
+            original_link = entry.link
+
+        articles.append(
+            {
+                "title": entry.title,
+                "link": original_link,
+                "published": entry.published,
+            }
+        )
 
     return articles
