@@ -37,6 +37,8 @@ from services.fda.search import search_fda_news
 
 from services.nhi.search import search_nhi_news
 
+from ai.summary import generate_summary
+
 
 def main():
 
@@ -104,7 +106,17 @@ def main():
 
     results.extend(format_nhi_section(nhi_news))
 
-    message = build_daily_report(results)
+    report = build_daily_report(results)
+
+    summary = generate_summary(report)
+
+    message = (
+        "🧠 Executive Summary\n\n"
+        + summary
+        + "\n\n"
+        + "────────────────────\n\n"
+        + report
+    )
 
     print(message)
 
