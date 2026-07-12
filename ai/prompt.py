@@ -27,21 +27,19 @@ Priority 1
 
 - Endometrial Cancer
 - Colorectal Cancer
-- Rectal Cancer
-
-
-Priority 2
 - Lung Cancer
 - Head and Neck Cancer
 
 
-Priority 3
+Priority 2
 
 - Gastrointestinal Stromal Tumor (GIST)
 - Ovarian Cancer
 - Colon Cancer
+- Rectal Cancer
 
 If multiple updates have similar scientific importance, prioritize the higher priority disease area.
+There is no order in the same priority class. If in the same priority, judge based on the rest evaluation below.
 
 ====================================================================
 
