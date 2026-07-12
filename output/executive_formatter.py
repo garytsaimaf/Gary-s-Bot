@@ -1,39 +1,45 @@
 import re
 
 
+NUMBER_ICONS = [
+    "①️⃣",
+    "②️⃣",
+    "③️⃣",
+    "④️⃣",
+    "⑤️⃣",
+    "⑥️⃣",
+]
+
+
 def build_executive_message(ai_output):
 
     text = ai_output.strip()
 
-    text = text.replace("Summary", "📌 Summary")
+    text = text.replace(
+        "Summary",
+        "📌 Summary"
+    )
 
     text = text.replace(
         "Top Intelligence",
         "\n📚 Top Intelligence"
     )
 
-    numbers = [
-        "①️⃣",
-        "②️⃣",
-        "③️⃣",
-        "④️⃣",
-        "⑤️⃣",
-        "⑥️⃣",
-    ]
-
-    count = 0
+    counter = 0
 
     def replace_title(match):
-        nonlocal count
 
-        if count >= len(numbers):
-            prefix = "•"
-        else:
-            prefix = numbers[count]
+        nonlocal counter
 
-        count += 1
+        icon = (
+            NUMBER_ICONS[counter]
+            if counter < len(NUMBER_ICONS)
+            else "•"
+        )
 
-        return f"{prefix} {match.group(0)}"
+        counter += 1
+
+        return f"{icon} Title:"
 
     text = re.sub(
         r"Title:",
@@ -48,7 +54,7 @@ def build_executive_message(ai_output):
 
     text = re.sub(
         r"Link:\s*(https?://\S+)",
-        "🔗 LINK",
+        r"🔗 LINK (\1)",
         text,
     )
 
