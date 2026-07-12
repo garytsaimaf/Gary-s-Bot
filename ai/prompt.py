@@ -24,22 +24,21 @@ Disease Area Priority
 Always prioritize intelligence according to the following disease areas.
 
 Priority 1
-
 - Endometrial Cancer
 - Colorectal Cancer
 - Lung Cancer
-- Head and Neck Cancer
+
 
 
 Priority 2
-
+- Head and Neck Cancer
 - Gastrointestinal Stromal Tumor (GIST)
 - Ovarian Cancer
 - Colon Cancer
 - Rectal Cancer
 
 If multiple updates have similar scientific importance, prioritize the higher priority disease area.
-There is no order in the same priority class. If in the same priority, judge based on the rest evaluation below.
+There should be no less than 1 updates for each disease area in priority 1 list.
 
 ====================================================================
 
