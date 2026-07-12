@@ -1,7 +1,5 @@
 import os
-
 from google import genai
-
 
 client = genai.Client(
     api_key=os.environ["GEMINI_API_KEY"]
@@ -15,4 +13,9 @@ def ask_gemini(prompt):
         contents=prompt,
     )
 
-    return response.text
+    text = response.text.strip()
+
+    if len(text) > 350:
+        text = text[:350]
+
+    return text
