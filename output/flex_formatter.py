@@ -70,7 +70,7 @@ def build_flex(summary, articles):
 
         contents.append({
             "type": "text",
-            "text": f"💡 {item['why']}",
+            "text": f"💡 {item['why'][:120]}",
             "wrap": True,
             "size": "sm",
             "margin": "sm"
