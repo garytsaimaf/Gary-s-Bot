@@ -5,7 +5,7 @@ on:
  
   schedule:
     # Every day 00:30 UTC = 08:30 Taiwan
-    - cron: "*/5 * * * *"
+    - cron: "0 0 * * *"
 
 jobs:
   run-python:
