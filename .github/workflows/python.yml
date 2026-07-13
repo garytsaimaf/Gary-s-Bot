@@ -1,6 +1,8 @@
 name: Gary's Medical AI Assistant
 
 on:
+ workflow_dispatch:
+ 
   schedule:
     # Every day 00:30 UTC = 08:30 Taiwan
     - cron: "*/5 * * * *"
